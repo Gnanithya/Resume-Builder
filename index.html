@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Professional Fresher Resume Builder">
+  <title> Resume Builder-VITS</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230d6efd'/%3E%3Cpath d='M20 16h18l8 8v24a4 4 0 0 1-4 4H20a4 4 0 0 1-4-4V20a4 4 0 0 1 4-4z' fill='%23ffffff'/%3E%3Cpath d='M38 16v8h8' fill='none' stroke='%230d6efd' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M24 30h16M24 38h16M24 46h10' stroke='%230d6efd' stroke-width='3' stroke-linecap='round'/%3E%3Ccircle cx='44' cy='46' r='8' fill='%2328a745'/%3E%3Cpath d='M40 46l3 3 6-7' fill='none' stroke='%23ffffff' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-mark">R</div>
+      <div>
+        <h1>ResumeCraft-VITS</h1>
+        <span>Professional Resume Builder</span>
+      </div>
+    </div>
+    <div class="top-actions">
+      <span id="saveStatus" class="save-status">● Saved locally</span>
+      <button id="themeBtn" class="btn btn-ghost">☾ Dark Mode</button>
+      <button id="clearBtn" class="btn btn-ghost">Clear All</button>
+      <button id="downloadBtn" class="btn btn-primary">Download Resume</button>
+    </div>
+  </header>
+
+  <main class="app-shell">
+    <aside class="sidebar">
+      <div class="sidebar-title">Resume Sections</div>
+      <button class="nav-item active" data-section="personal"><span>01</span> Personal Details</button>
+      <button class="nav-item" data-section="education"><span>02</span> Education</button>
+      <button class="nav-item" data-section="skills"><span>03</span> Skills</button>
+      <button class="nav-item" data-section="languages"><span>04</span> Languages</button>
+      <button class="nav-item" data-section="projects"><span>05</span> Projects</button>
+      <button class="nav-item" data-section="experience"><span>06</span> Internship & Workshops</button>
+      <button class="nav-item" data-section="certificates"><span>07</span> Certificates</button>
+      <button class="nav-item" data-section="summary"><span>08</span> Profile Summary</button>
+      <button class="nav-item" data-section="colors"><span>09</span> Resume Colors</button>
+      <div class="sidebar-tip">
+        <strong>Auto-save enabled</strong>
+        <p>Your information is automatically stored in this browser using localStorage.</p>
+      </div>
+    </aside>
+
+    <section class="editor">
+      <div class="section-panel active" id="section-personal">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">01 / PERSONAL</p>
+            <h2>Personal Details</h2>
+            <p>Start with your basic information and professional links.</p>
+          </div>
+        </div>
+
+        <div class="photo-upload-card">
+          <div class="avatar-preview" id="photoPreview">
+            <span>👤</span>
+          </div>
+          <div class="photo-copy">
+            <h3>Profile Photo</h3>
+            <p>Use a clear professional photo. JPG, PNG or WEBP.</p>
+            <div class="photo-actions">
+              <label class="btn btn-secondary" for="photoInput">Upload Photo</label>
+              <button type="button" id="removePhotoBtn" class="btn btn-ghost">Remove</button>
+            </div>
+            <input id="photoInput" type="file" accept="image/png,image/jpeg,image/webp" hidden>
+          </div>
+        </div>
+
+        <div class="form-grid">
+          <div class="field">
+            <label>Full Name *</label>
+            <input id="fullName" type="text" placeholder="Enter full name">
+          </div>
+          <div class="field">
+            <label>Professional Title</label>
+            <input id="jobTitle" type="text" placeholder="Software Developer | Fresher">
+          </div>
+          <div class="field">
+            <label>Phone Number *</label>
+            <input id="phone" type="tel" placeholder="+91 98765 43210">
+          </div>
+          <div class="field">
+            <label>Email *</label>
+            <input id="email" type="email" placeholder="you@example.com">
+          </div>
+          <div class="field">
+            <label>GitHub <span>Optional</span></label>
+            <input id="github" type="url" placeholder="https://github.com/username">
+          </div>
+          <div class="field">
+            <label>LinkedIn <span>Optional</span></label>
+            <input id="linkedin" type="url" placeholder="https://linkedin.com/in/username">
+          </div>
+          <div class="field full">
+            <label>Address</label>
+            <textarea id="address" rows="2" placeholder="City, State, India"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-panel" id="section-education">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">02 / EDUCATION</p>
+            <h2>Education</h2>
+            <p>Add your primary, secondary and higher education.</p>
+          </div>
+          <button id="addEducationBtn" class="btn btn-primary">+ Add Education</button>
+        </div>
+        <div id="educationList" class="dynamic-list"></div>
+      </div>
+
+      <div class="section-panel" id="section-skills">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">03 / SKILLS</p>
+            <h2>Skills</h2>
+            <p>Keep technical and personal skills separate.</p>
+          </div>
+        </div>
+
+        <div class="skills-columns">
+          <div class="skill-box">
+            <div class="box-heading">
+              <div>
+                <h3>Technical Skills</h3>
+                <p>Programming, tools, frameworks, databases, etc.</p>
+              </div>
+              <button id="addTechnicalBtn" class="small-add">+ Add</button>
+            </div>
+            <div id="technicalSkills" class="skill-list"></div>
+          </div>
+
+          <div class="skill-box">
+            <div class="box-heading">
+              <div>
+                <h3>Personal Skills</h3>
+                <p>Communication, teamwork, leadership, etc.</p>
+              </div>
+              <button id="addPersonalBtn" class="small-add">+ Add</button>
+            </div>
+            <div id="personalSkills" class="skill-list"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-panel" id="section-languages">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">04 / LANGUAGES</p>
+            <h2>Languages</h2>
+            <p>Add languages and select your proficiency.</p>
+          </div>
+          <button id="addLanguageBtn" class="btn btn-primary">+ Add Language</button>
+        </div>
+        <div id="languageList" class="dynamic-list"></div>
+      </div>
+
+
+      <div class="section-panel" id="section-projects">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">05 / PROJECTS</p>
+            <h2>Projects</h2>
+            <p>Add academic or hands-on projects to showcase practical experience.</p>
+          </div>
+          <button id="addProjectBtn" class="btn btn-primary">+ Add Project</button>
+        </div>
+        <div id="projectList" class="dynamic-list"></div>
+      </div>
+
+      <div class="section-panel" id="section-experience">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">06 / EXPERIENCE</p>
+            <h2>Internship & Workshops</h2>
+            <p>Add internships, training programs and workshops.</p>
+          </div>
+          <button id="addExperienceBtn" class="btn btn-primary">+ Add Experience</button>
+        </div>
+        <div id="experienceList" class="dynamic-list"></div>
+      </div>
+
+      <div class="section-panel" id="section-certificates">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">07 / CERTIFICATES</p>
+            <h2>Certificates</h2>
+            <p>Add certifications, course certificates and credentials.</p>
+          </div>
+          <button id="addCertificateBtn" class="btn btn-primary">+ Add Certificate</button>
+        </div>
+        <div id="certificateList" class="dynamic-list"></div>
+      </div>
+
+      <div class="section-panel" id="section-summary">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">05 / PROFILE</p>
+            <h2>Profile Summary</h2>
+            <p>Write a short introduction for recruiters.</p>
+          </div>
+        </div>
+        <div class="field">
+          <label>Professional Summary</label>
+          <textarea id="summary" rows="8" placeholder="Motivated and detail-oriented graduate with a strong foundation in software development..."></textarea>
+          <div class="helper">Recommended: 3–5 concise lines focused on your skills, education and career goals.</div>
+        </div>
+      </div>
+    </section>
+
+
+      <div class="section-panel" id="section-colors">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">09 / DESIGN</p>
+            <h2>Edit Resume Colors</h2>
+            <p>Customize the resume headers and body text independently.</p>
+          </div>
+        </div>
+
+        <div class="color-editor">
+          <div class="color-card">
+            <div>
+              <h3>Header Color</h3>
+              <p>Used for your name, section headings and resume accents.</p>
+            </div>
+            <div class="color-control">
+              <input id="headerColor" type="color" value="#1d3557">
+              <input id="headerColorText" type="text" value="#1d3557" maxlength="7">
+            </div>
+          </div>
+
+          <div class="color-card">
+            <div>
+              <h3>Body Color</h3>
+              <p>Used for normal resume content and supporting text.</p>
+            </div>
+            <div class="color-control">
+              <input id="bodyColor" type="color" value="#273449">
+              <input id="bodyColorText" type="text" value="#273449" maxlength="7">
+            </div>
+          </div>
+
+          <button id="resetColorsBtn" class="btn btn-secondary">Reset Resume Colors</button>
+        </div>
+      </div>
+
+    <section class="preview-area">
+      <div class="preview-toolbar">
+        <div>
+          <strong>Live Preview</strong>
+          <span>A4 Resume</span>
+        </div>
+        <button id="printBtn" class="btn btn-secondary">Print / Save PDF</button>
+      </div>
+
+      <div class="resume-page" id="resumePage">
+        <div class="resume-header">
+          <div class="resume-identity">
+            <h1 id="previewName">Your Name</h1>
+            <h2 id="previewTitle">Software Developer | Fresher</h2>
+            <div class="contact-line">
+              <span id="previewPhone">+91 XXXXX XXXXX</span>
+              <span id="previewEmail">you@example.com</span>
+            </div>
+            <div class="contact-line">
+              <span id="previewGithub" class="hidden"></span>
+              <span id="previewLinkedin" class="hidden"></span>
+              <span id="previewAddress">City, State, India</span>
+            </div>
+          </div>
+          <div class="resume-photo hidden" id="resumePhoto">
+            <img id="previewPhoto" alt="Profile photo">
+          </div>
+        </div>
+
+        <div class="resume-section" id="previewSummarySection">
+          <h3>PROFILE</h3>
+          <p id="previewSummary">Your professional summary will appear here.</p>
+        </div>
+
+        <div class="resume-section">
+          <h3>EDUCATION</h3>
+          <div id="previewEducation"></div>
+        </div>
+
+
+        <div class="resume-section" id="previewProjectsSection">
+          <h3>PROJECTS</h3>
+          <div id="previewProjects"></div>
+        </div>
+
+        <div class="resume-section" id="previewExperienceSection">
+          <h3>INTERNSHIP & WORKSHOPS</h3>
+          <div id="previewExperience"></div>
+        </div>
+
+        <div class="resume-section" id="previewCertificatesSection">
+          <h3>CERTIFICATES</h3>
+          <div id="previewCertificates"></div>
+        </div>
+
+        <div class="resume-section" id="previewTechnicalSection">
+          <h3>TECHNICAL SKILLS</h3>
+          <div id="previewTechnical" class="resume-tags"></div>
+        </div>
+
+        <div class="resume-section" id="previewPersonalSection">
+          <h3>PERSONAL SKILLS</h3>
+          <div id="previewPersonal" class="resume-tags"></div>
+        </div>
+
+        <div class="resume-section" id="previewLanguagesSection">
+          <h3>LANGUAGES</h3>
+          <div id="previewLanguages"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <p>Built by © CSE IOT 3RD year-5G</p>
+  </footer>
+  <div id="toast" class="toast"></div>
+  <script src="script.js"></script>
+</body>
+</html>
